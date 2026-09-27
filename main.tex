@@ -1,52 +1,98 @@
-\documentclass[a4paper,12pt]{article}
+%!TEX encoding = UTF-8 Unicode
+% Add 'final' to the template options to remove "DOCUMENTO PROVISÓRIO" from the cover
+\documentclass[11pt,a4paper,twoside]{memoir}
 
+\usepackage[engineering,deti]{uaThesisTemplate}
 \usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{url}
-\usepackage[hidelinks]{hyperref}
+\renewcommand\familydefault{\rmdefault}
+\usepackage[portuguese,english]{babel}
 
-\title{A Declarative Framework for Generating Zero Trust Applications\\[0.5em]
-  \large Dissertation Proposal}
-\author{Sebastião Teixeira\\[0.5em]
-  \small Supervisors: João Rafael Almeida, Osvaldo Rocha Pacheco}
-\date{}
+\ThesisYear{\the\year}
+\DocumentTypeThesisProposal
+
+\Author{Sebastião}{Teixeira}
+\TitlePT{Um framework declarativo para a geração de aplicações zero trust}
+\TitleEN{A declarative framework for generating zero trust applications}
+
+\Supervisor{João Rafael Almeida}{(categoria TBD)}
+\SupervisorMember{Osvaldo Rocha Pacheco}{(categoria TBD)}{do Departamento de Eletrónica, Telecomunicações e Informática}{da Universidade de Aveiro}{e }
+\Degree{Mestre}{(mestrado TBD)}
+
+\Abstract{palavras-chave}{zero trust, NIST SP 800-207, especificação declarativa, geração de código, conformidade.}
+         {resumo}{\selectlanguage{portuguese}TBD}
+\Abstract{keywords}{zero trust, NIST SP 800-207, declarative specification, code generation, conformance.}
+         {abstract}{\selectlanguage{english}TBD}
+
+\AIUse{\input{sections/ai-declaration}}
+
+\usepackage{microtype}
+\usepackage[hang,small,bf]{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\pdfstringdefDisableCommands{%
+  \def\\{ }%
+  \def\texttt#1{#1}%
+  \def\selectlanguage#1{}%
+}
+\hypersetup{
+  pdfauthor={{\ciAuthorFirst} {\ciAuthorLast}},
+  pdftitle={\ciTitleEN},
+  pdfkeywords={\ciKeywords}
+}
+\usepackage{csquotes}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[backend=biber, style=ieee, sorting=none, natbib=true, mincitenames=1, maxcitenames=2]{biblatex}
+\addbibresource{refs.bib}
+\usepackage[printonlyused]{acronym}
+\usepackage{indentfirst}
+\usepackage[section]{placeins}
+
+% Margins per the UA standards for the presentation of dissertations
+\settypeblocksize{245mm}{155mm}{*}
+\setulmargins{3cm}{*}{*}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setlrmarginsandblock{3cm}{2.5cm}{*}
+\checkandfixthelayout
 
 \begin{document}
 
-\maketitle
+\MakeCover
 
-\begin{abstract}
-TBD (written last, once the methods section is settled)
-\end{abstract}
-
+\frontmatter
+\pagestyle{plain}
+\chapterstyle{veelo}
+\small
+\SingleSpacing
 \tableofcontents
+\clearpage
 
-\section{Introduction}
-\label{sec:intro}
+\mainmatter
+\normalsize
+\OnehalfSpacing
+\maxtocdepth{subsection}
+\setsecnumdepth{subsubsection}
+
+\chapter{Introduction}
+\label{ch:intro}
 \input{sections/introduction}
 
-\section{State of the Art}
-\label{sec:sota}
+\chapter{State of the Art}
+\label{ch:sota}
 \input{sections/state-of-the-art}
 
-\section{Methods and Proposal}
-\label{sec:methods}
+\chapter{Methods and Proposal}
+\label{ch:methods}
 \input{sections/methods}
 
-\section{Work Plan}
-\label{sec:plan}
+\chapter{Work Plan}
+\label{ch:plan}
 \input{sections/work-plan}
 
-\bibliographystyle{ieeetr}
-\bibliography{refs}
-
-\appendix
-
-\section{Declaration of AI Use (UA Modelo 03)}
-\label{app:ai}
-\input{sections/ai-declaration}
+\SingleSpacing
+\printbibliography[heading=bibintoc]
 
 \end{document}
