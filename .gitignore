@@ -1,3 +1,28 @@
-.claude/
-.cache/
+# LaTeX build products
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Generated data and results: reproduced by code, never committed
+data/
+results/
+corpus/cache/
+
+# Environments
+.venv/
+__pycache__/
+
+# Private planning: kept local, never published
+PLAN.md
 ROADMAP.md
+
+# Local tooling; only the attribution settings are shared
+.claude/*
+!.claude/settings.json
+.cache/
