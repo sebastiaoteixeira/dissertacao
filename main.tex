@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,oneside]{report}
+\documentclass[a4paper,12pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -8,8 +8,10 @@
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 
-\title{A Declarative Framework for Generating Zero Trust Applications}
-\author{Sebastião Teixeira}
+\title{A Declarative Framework for Generating Zero Trust Applications\\[0.5em]
+  \large Dissertation Proposal}
+\author{Sebastião Teixeira\\[0.5em]
+  \small Supervisors: João Rafael Almeida, Osvaldo Rocha Pacheco}
 \date{}
 
 \begin{document}
@@ -17,41 +19,34 @@
 \maketitle
 
 \begin{abstract}
-TBD (written after chapter 6; a placeholder abstract would fix claims before the evidence exists)
+TBD (written last, once the methods section is settled)
 \end{abstract}
 
 \tableofcontents
 
-\chapter{Introduction}
-\label{ch:intro}
+\section{Introduction}
+\label{sec:intro}
+\input{sections/introduction}
 
-\chapter{Zero Trust: Principles and Conformance Criteria}
-\label{ch:zt}
+\section{State of the Art}
+\label{sec:sota}
+\input{sections/state-of-the-art}
 
-\chapter{Declarative Generation of Application Backends}
-\label{ch:declarative}
+\section{Methods and Proposal}
+\label{sec:methods}
+\input{sections/methods}
 
-\chapter{Requirements and Architecture}
-\label{ch:requirements}
-
-\chapter{Implementation}
-\label{ch:implementation}
-
-\chapter{Validation: Declared Model versus Observed Behaviour}
-\label{ch:validation}
-
-\chapter{Complementary Work}
-\label{ch:complementary}
-
-\chapter{Conclusion}
-\label{ch:conclusion}
+\section{Work Plan}
+\label{sec:plan}
+\input{sections/work-plan}
 
 \bibliographystyle{ieeetr}
 \bibliography{refs}
 
 \appendix
 
-\chapter{Framework Grammar}
-\label{app:grammar}
+\section{Declaration of AI Use (UA Modelo 03)}
+\label{app:ai}
+\input{sections/ai-declaration}
 
 \end{document}
