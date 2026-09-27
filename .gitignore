@@ -8,6 +8,9 @@
 *.out
 *.synctex.gz
 *.toc
+*.bcf
+*.run.xml
+/main.pdf
 
 # Generated data and results: reproduced by code, never committed
 data/

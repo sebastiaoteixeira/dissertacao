@@ -3,7 +3,7 @@ name: Compile PDF
 on:
   push:
     branches: [main]
-    paths: ['**.tex', '**.bib', '**.cls', '**.bst', '**.sty', 'figures/**', '.github/workflows/compile.yml']
+    paths: ['**.tex', '**.bib', '**.cls', '**.bst', '**.sty', 'figures/**', 'ua-thesis-template/**', '.latexmkrc', '.github/workflows/compile.yml']
   workflow_dispatch:
 
 permissions:
