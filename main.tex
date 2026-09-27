@@ -11,6 +11,10 @@
 
 \ThesisYear{\the\year}
 \DocumentTypeThesisProposal
+% The template only knows the PhD "Proposta de Tese"; this is the MSc dissertation proposal
+\patchcmd{\HEADER}{DE TESE}{DE DISSERTA\c{C}\~AO}{}{\PatchFailed}
+\patchcmd{\MakeCover}{Proposta de Tese}{Proposta de Disserta\c{c}\~ao}{}{\PatchFailed}
+\patchcmd{\MakeCover}{Proposta de Tese}{Proposta de Disserta\c{c}\~ao}{}{\PatchFailed}
 
 \Author{Sebastião}{Teixeira}
 \TitlePT{Um framework declarativo para a geração de aplicações zero trust}
