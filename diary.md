@@ -1,3 +1,19 @@
+### 2026-11-16 – 2026-11-22
+
+- Execução de experiências no cluster do IEETA a comparar os backends gerados por LLM via especificação Stackform com FastAPI
+- Lançamento da versão 1.1.1 da ferramenta, atualização do artigo e CD pipeline na plataforma X
+
+### 2026-11-09 – 2026-11-15
+
+- Planeamento de um artigo que compara especificações Stackform geradas por LLM com código FastAPI, com alvo na MODELS 2027
+- Criação e realização de um workshop de Claude Code com boas práticas de desenvolvimento de software
+
+### 2026-11-02 – 2026-11-08
+
+- Apresentação da 2.ª sprint (estado da arte), com diagrama da arquitetura proposta
+- Correção do pacote da versão 1.1.0 da ferramenta
+- Finalização do artigo da ferramenta para submissão à SoftwareX, com Osvaldo Rocha Pacheco como coautor, a aguardar revisão do orientador
+
 ### 2026-10-26 – 2026-11-01
 
 - Conclusão da revisão sistemática com 200 estudos incluídos: 19 sobre critérios zero trust e 181 sobre abordagens declarativas de segurança
