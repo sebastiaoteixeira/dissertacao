@@ -1,0 +1,190 @@
+# Each sprint: cover + 2 slides (max 3). Slide 2 carries the sprint priority, slide 3 is incremental.
+# Bullets nest as `- Parent: [child, child]`. Text in [brackets] is still to be filled in.
+# Optional `figure` beside the bullets: `flow: [stage, ...]`, `stat: {figures, source}` or `image: path`.
+# A slide without `points` gives the whole body to its figure.
+
+title: A declarative framework for generating zero trust applications
+authors:
+  - Sebastião Teixeira
+  - João Rafael Almeida
+  - Osvaldo Rocha Pacheco
+
+sprints:
+  - number: 1
+    focus: Motivation and objectives
+    summary:
+      - Can the specification of a system be enough to generate it, with zero trust enforced by construction rather than by review?
+    intro: >-
+      (30 s) AI now writes a lot of code, fast, but it is probabilistic and often wrong:
+      quality and security still rest on an expert reviewing it by hand. Attackers have sped up
+      too: most exploited flaws are zero-days, and the rest are exploited within days.
+      Zero trust is the principle that answers this: trust nothing, verify every request.
+      But applying it is manual and scattered across the code. This dissertation proposes a
+      middle ground: generate the application deterministically from its specification,
+      with zero trust built in.
+    slides:
+      - title: Motivation and Objectives
+        points:
+          - Motivation:
+              - Writing code by hand is slow and repetitive
+              - AI-generated code is error-prone
+              - Information security is a growing concern
+              - Security depends on expert review
+              - Zero trust is enforced by hand
+          - Objectives:
+              - Study zero trust models
+              - Analyse declarative policy DSLs
+              - Design a declarative framework
+              - Generate backend and security layers
+              - Validate declared vs. observed
+        figure:
+          stat:
+            figures:
+              - "70%": of exploited flaws in 2023 were zero-days
+              - "5 days": average time-to-exploit in 2023, down from 32
+            source: Mandiant (Google Cloud), Oct 2024
+        notes: |-
+          Com o AI hoje em dia é possível produzir muito código rapidamente mas: é probabilistico e comete erros com frequência. A qualidade e a segurança do software produzido depende de uma análise manual do profissional e dos seus conhecimentos e habilidades. Aqui pretende-se chegar a uma solução que permita encontrar um meio termo. Conseguimos construir sistemas relativamente simples sem nada mais do que a especificação do sistemas, de forma deterministica, e automatizamos a integração de mecanismos de segurança que permitam atribuir ao software a qualidade de zero-trust.
+
+          Most exploited flaws are zero-days, and attackers weaponise the rest within days (Mandiant, 2023 data; the 5-day average excludes 15 outliers, 47 days with them). AI sharpens this: Google's GTIG reports exploitation nearly doubling in 2026 (10.5 → 18 per month) and the first AI-developed zero-day exploit (May 2026). Security can no longer be hand-configured after the fact.
+      - title: Next Steps and Challenges
+        points:
+          - Next steps:
+              - "Systematic review: zero trust criteria, declarative approaches, their intersection"
+              - "Compare zero trust architecture models: NIST SP 800-207, CISA, DoD"
+              - "Extend the existing backend generator (authentication, RBAC)"
+          - Challenges:
+              - Proving that a system is zero trust is difficult
+              - Stand apart from PostgREST/Supabase (RLS) and DSLs such as Cedar, Rego, OpenFGA
+
+  - number: 2
+    focus: State of the art
+    summary:
+      - "Project: generate applications from a declarative specification, with zero trust enforced by construction"
+      - Systematic review of 200 studies, submitted to MODELSWARD 2027, plus a grey-literature scan
+      - "Gap: generators cover few zero trust criteria; runtime tools cover many but generate nothing"
+      - "Direction: generate enforcement points, keep a runtime decision point"
+    intro: >-
+      (30 s) Last sprint set the goal: generate applications from their specification
+      with zero trust built in. This sprint asks what already exists. A systematic review of
+      893 unique studies, plus a scan of tools outside academia, gives the same picture:
+      tools that generate code cover few zero trust criteria, and tools that cover many only
+      enforce them at runtime. None does both, and that is the gap this dissertation targets.
+    slides:
+      - title: State of the Art
+        points:
+          - "Review: 200 of 893 unique studies":
+              - 19 on zero trust criteria
+              - 181 declarative approaches
+              - Paper submitted to MODELSWARD 2027
+          - Findings:
+              - Mostly authorisation (90%)
+              - Criteria per enterprise, not per app
+              - Generation covers fewer criteria
+          - Leverage:
+              - NIST enforcement / decision split
+              - "Usage Control (UCON): continuous re-evaluation"
+              - Existing generator
+        figure:
+          image: figures/coverage.png
+        notes: |-
+          Studied: systematic review, searched 1 Sep 2026 (Scopus, WoS, IEEE, ACM; 2015 onward). 1,503 identified, 893 screened, 340 full texts assessed, 200 included: 19 state zero trust criteria, 181 are declarative security approaches. Title/abstract agreement 93.3%.
+
+          Criteria: NIST SP 800-207 tenets T1-T7 plus least privilege, micro-segmentation and workload identity (ten keys). Consensus is an operational loop: dynamic policy and telemetry (16/19), asset posture (15), continuous re-evaluation (14). Criteria closest to an application are the least stated (T1 in 7, workload identity in 6).
+
+          Approaches: 60% policy languages, 23% model-driven, 58 bespoke languages, XACML most reused. ABAC 73, RBAC 50. Authorisation 90%, authentication 13%: declarative security means declarative authorisation.
+
+          Generated vs. runtime: mean criteria covered out of ten. Runtime decision point 4.0 (85 approaches), generated 3.0 (40), both 4.9 (26). Products outside the systematic corpus, chosen purposively: PostgREST/Supabase/Hasura put policy in the datastore; Cedar trades expressiveness for verifiability; Rego/OPA is policy as code; Zanzibar decides from a relation graph.
+
+          Gap: no approach covers all ten keys (median 4); only 6 cover asset posture, continuous re-evaluation and telemetry together; only 2 mention zero trust (PAROLE, SmartUcon). No growth after SP 800-207 (3.8 keys before 2021, 3.5 after). Hence the hybrid direction: generate the enforcement points, keep a runtime decision point.
+
+          Figure: tools found outside the review (grey literature), scored on the same ten keys. Tools that generate the application cover 1 to 3; policy languages stop at 4; only runtime infrastructure reaches 8 to 10 (OpenZiti, Pomerium, Istio, Teleport). None generates the application with zero trust built in.
+      - title: Next Steps / Challenges / Bottlenecks
+        points:
+          - Next steps:
+              - Choose the requirements and architecture methodology
+              - Trace requirements to the ten zero trust criteria
+              - "Architecture: generated enforcement points + runtime decision point"
+              - Submit the Stackform paper
+          - Challenges:
+              - Turn enterprise-level tenets into per-application decidable conditions
+              - Continuous evaluation needs state, time and events
+              - Zero trust can be refuted by testing, but difficultly proven
+        figure:
+          image: figures/architecture.png
+
+  - number: 3
+    focus: Methodology
+    summary:
+      - "Project: generate applications from a declarative specification, with zero trust enforced by construction"
+      - "Method: architecture-centric design (ACDM), with the ten zero trust criteria as drivers and STRIDE for threats"
+      - "Architecture: a trust layer on Stackform generates enforcement points and configures off-the-shelf runtime"
+      - "Validation: spec-derived misuse tests, declared vs observed per criterion"
+    intro: >-
+      (30 s) Last sprint found the gap: generators cover few zero trust criteria, and runtime
+      tools cover many but are configured by hand. This sprint defines how to close it. The
+      ten zero trust criteria become architectural drivers, and STRIDE turns threats into tests.
+      Stackform gains a trust layer: from the same specification it generates enforcement points,
+      policies and the configuration of off-the-shelf runtime components. Validation compares
+      what the specification declares with what the running system does.
+    slides:
+      - title: Methodology
+        points:
+          - Approach:
+              - "ACDM: criteria as drivers"
+              - "STRIDE: threats as tests"
+          - Architecture:
+              - Trust model from the spec
+              - One module per concern
+              - Runtime used off the shelf
+          - Solutions:
+              - Cedar, behind AuthZEN
+              - SPIRE and mTLS
+              - Networks from call graph
+              - "OpenTelemetry: events to SIEM"
+              - "CAEP: revocations from SIEM, IdP"
+          - "Validation: declared vs observed"
+        figure:
+          image: figures/trust_layer.png
+        notes: |-
+          Approach: ACDM (Lattanze), already used in this group (Ferreira's dissertation). The ten zero trust criteria from sprint 2 are the architectural drivers, written as quality attribute scenarios. STRIDE (spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege) derives threat requirements; each becomes a misuse-case test.
+
+          Architecture: the specification is parsed into Stackform's API model; a new trust model adds workloads, the call graph, enforcement sites and events. One generator module per concern: policies (T1, T3, T4, LP), identity (WID, T2, T5), segmentation (MS), telemetry (T7), re-evaluation (T6), conformance tests. Runtime components are deployed unmodified; SIEM and IdP stay outside the system and are reached through open standards.
+
+          Solutions: Cedar for its typed schema mapped from the specification, build-time validation and SMT analysis, behind an AuthZEN interface so OPA or SAPL can be added. The UCON parts Cedar lacks (ongoing authorisation, attribute mutability, obligations) are generated code. SPIRE issues workload identities (Docker attestor) used for mTLS. One Docker network per call-graph edge gives micro-segmentation on the existing Compose target; Kubernetes is a possible future target. OpenTelemetry exports events to any SIEM (OCSF schema); CAEP receives revocation signals from the SIEM or IdP.
+
+          Validation: generated misuse tests run against the deployed application; a report states, per criterion, what the specification declares and what was observed.
+      - title: Methodology
+        figure:
+          image: figures/trust_pipeline.png
+        notes: |-
+          One row per generator module: what it emits, which off-the-shelf component consumes it, which external system it reaches through a standard, and the criteria it covers. The first row is what Stackform generates today; the light boxes are new in the fork. Runtime components are deployed unmodified by the generated Compose file; SIEM and IdP stay outside the system.
+      - title: Next Steps / Challenges
+        points:
+          - Next steps:
+              - "Benchmark in progress: LLM-written Stackform specs vs FastAPI"
+              - Write requirements and architecture
+              - Fork Stackform, add the trust model and Cedar policy generator
+              - Choose the validation use case
+          - Challenges:
+              - Derive workloads and call graph from the specification
+              - Ongoing authorisation (UCON) over a stateless decision point
+              - Generated policies verified, not only tested
+
+  - number: 4
+    focus: Work done and preliminary results
+    summary:
+      - Can the specification of a system be enough to generate it, with zero trust enforced by construction rather than by review?
+    intro: "[30 s summary of the work done and results]"
+    slides:
+      - title: Work Done and Preliminary Results
+        points:
+          - "Work done: [implemented components]"
+          - "Preliminary results: [use cases, conformance metrics]"
+          - "Deviations from the plan: [...]"
+        notes: "[Show evidence: demo, table or chart.]"
+      - title: Next Steps / Challenges / Bottlenecks
+        points:
+          - "Next steps: [validation and writing]"
+          - "Challenges: [...]"
+          - "Bottlenecks: [...]"

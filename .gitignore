@@ -27,4 +27,6 @@ ROADMAP.md
 
 .cache/
 
+# Sprint decks: rendered by presentations/build.py
+presentations/sprint-*.pptx
 diary/
