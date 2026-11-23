@@ -2,6 +2,8 @@
 
 - Execução de experiências no cluster do IEETA a comparar os backends gerados por LLM via especificação Stackform com FastAPI
 - Lançamento da versão 1.1.1 da ferramenta, atualização do artigo e CD pipeline na plataforma X
+- Planeamento da metodologia e desenho da arquitetura
+- Preparação da apresentação da 3.ª sprint
 
 ### 2026-11-09 – 2026-11-15
 
