@@ -7,7 +7,7 @@
 
 ### 2026-11-09 – 2026-11-15
 
-- Planeamento de um artigo que compara especificações Stackform geradas por LLM com código FastAPI, com alvo na MODELS 2027
+- Planeamento de um artigo que compara especificações Stackform geradas por LLM com código FastAPI
 - Criação e realização de um workshop de Claude Code com boas práticas de desenvolvimento de software
 
 ### 2026-11-02 – 2026-11-08
